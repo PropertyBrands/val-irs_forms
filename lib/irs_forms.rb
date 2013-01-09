@@ -6,4 +6,5 @@ module IrsForms
 end
 
 dir = File.dirname(__FILE__) + '/irs_forms'
+require "#{dir}/form"
 require "#{dir}/form1099_misc"
