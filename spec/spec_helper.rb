@@ -25,8 +25,8 @@ def assert_data_matches_file_content(file, data)
   data.bytes.to_a.should == File.open(asset_path(file)).read.bytes.to_a
 end
 
-def write_content_to_file(file, content)
-  #return nil
+def write_content_to_file(file, content, force_write=false)
+  return nil unless force_write
 
   f = File.new(asset_path(file), 'w')
   f.write content
