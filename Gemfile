@@ -4,12 +4,11 @@ source "http://rubygems.org"
 #   gem "activesupport", ">= 2.3.5"
 
 gem 'activesupport'
-gem 'prawn'
+gem 'prawn', '>= 0.12.0'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 group :development do
-  gem 'appraisal'
   gem 'rake'
   gem "jeweler", ">= 1.8.3"
   gem 'appraisal'

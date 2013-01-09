@@ -26,7 +26,7 @@ def assert_data_matches_file_content(file, data)
 end
 
 def write_content_to_file(file, content)
-  return nil
+  #return nil
 
   f = File.new(asset_path(file), 'w')
   f.write content
