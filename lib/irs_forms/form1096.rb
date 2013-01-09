@@ -35,47 +35,47 @@ class IrsForms::Form1096 < IrsForms::Form
 
     # Filer Name/Address
     @pdf.bounding_box([x + 20, y], :width => 260, :height => 75) do
-       @pdf.text data[:filer_name].to_s
+       text data[:filer_name].to_s
        @pdf.move_down(20)
-       @pdf.text data[:filer_street_address].to_s
+       text data[:filer_street_address].to_s
        @pdf.move_down(15)
-       @pdf.text data[:filer_city_state_zip].to_s
+       text data[:filer_city_state_zip].to_s
     end
 
     y -= 86
 
     # Person Contact Information
     @pdf.bounding_box([x, y], :width => 200) do
-       @pdf.text data[:contact_name].to_s
+       text data[:contact_name].to_s
        @pdf.move_down(10)
-       @pdf.text data[:email_address].to_s
+       text data[:email_address].to_s
     end
     @pdf.bounding_box([x + col2_offset, y], :width => 200) do
-       @pdf.text data[:telephone_number].to_s
+       text data[:telephone_number].to_s
        @pdf.move_down(10)
-       @pdf.text data[:fax_number].to_s
+       text data[:fax_number].to_s
     end
 
     y -= 50
 
     # EIN
     @pdf.bounding_box([x, y], :width => 200) do
-       @pdf.text data[:employer_identification_number].to_s
+       text data[:employer_identification_number].to_s
     end
 
     # SSN
     @pdf.bounding_box([x + 100, y], :width => 200) do
-       @pdf.text data[:social_security_number].to_s
+       text data[:social_security_number].to_s
     end
 
     # Total Number of Forms
     @pdf.bounding_box([x + col2_offset, y], :width => 200) do
-       @pdf.text data[:total_number_of_forms].to_s
+       text data[:total_number_of_forms].to_s
     end
 
     # Total Amount Reported
     @pdf.bounding_box([x + col2_offset + 190, y], :width => 200) do
-       @pdf.text format_amount(data[:total_amount_reported]).to_s
+       text format_amount(data[:total_amount_reported]).to_s
     end if data[:total_amount_reported]
 
     row1 = 475
@@ -89,7 +89,7 @@ class IrsForms::Form1096 < IrsForms::Form
                         when '1099msc'
                           [col3, row2]
                         end
-    @pdf.draw_text "X", at: check_form_coords if check_form_coords
+    text "X", at: check_form_coords if check_form_coords
   end
 
 end

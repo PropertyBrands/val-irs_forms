@@ -7,5 +7,7 @@ end
 
 dir = File.dirname(__FILE__) + '/irs_forms'
 require "#{dir}/form"
+require "#{dir}/form1099"
 require "#{dir}/form1099_misc"
+require "#{dir}/form1099_int"
 require "#{dir}/form1096"
