@@ -56,7 +56,7 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
     y -= 40
 
     # Recipient Address
-    @pdf.bounding_box([x, y], :width => 120, :height => 50) do
+    @pdf.bounding_box([x, y], :width => 240, :height => 50) do
        text hash[:recipient_street_address]
        @pdf.move_down 15
        text hash[:recipient_city_state_zip]

@@ -26,7 +26,7 @@ describe "Form1099Misc Copy A" do
         :recipient_federal_id => 'YY-YYYYYY1',
         :recipient_name => 'Recipient Name',
         :recipient_street_address => 'Street Address Line 1',
-        :recipient_city_state_zip => 'City, State 11111',
+        :recipient_city_state_zip => 'Long Name for a City, State 11111-1111',
         :recipient_account_number => 'XXXXX',
         :nonemployee_compensation => '1234.56'
       }
