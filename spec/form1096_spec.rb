@@ -52,6 +52,14 @@ describe "Form1096" do
       write_content_to_file('f1096_with_data_and_no_template.pdf', pdf)
       assert_data_matches_file_content('f1096_with_data_and_no_template.pdf', pdf)
     end
+
+    it "should generate PDF with data on the template with test offset" do
+      @form1096.x_offset = 20 # right 20px
+      @form1096.y_offset = -20 # down 20px
+      pdf = @form1096.to_pdf(:with_template => true)
+      write_content_to_file('f1096_with_data_and_template_offset.pdf', pdf, true)
+      assert_data_matches_file_content('f1096_with_data_and_template_offset.pdf', pdf)
+    end
   end
 
 end

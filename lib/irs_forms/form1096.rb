@@ -24,8 +24,8 @@ class IrsForms::Form1096 < IrsForms::Form
     col2_offset = 200
     col3_offset = 355
 
-    x = @pdf.bounds.left + x_offset
-    y = @pdf.bounds.top - y_offset - 10
+    x = pdf_left + x_offset
+    y = pdf_top - y_offset - 10
 
     # Filer Name/Address
     @pdf.bounding_box([x + 20, y], :width => 260, :height => 75) do
@@ -72,10 +72,10 @@ class IrsForms::Form1096 < IrsForms::Form
        text format_amount(data[:total_amount_reported]).to_s
     end if data[:total_amount_reported]
 
-    row1 = 475
-    row2 = 428
-    col3  = 100
-    col14 = 515
+    row1 = 475 + self.y_offset
+    row2 = 428 + self.y_offset
+    col3  = 100 + self.x_offset
+    col14 = 515 + self.x_offset
 
     check_form_coords = case data[:type_of_form]
                         when '1099int'

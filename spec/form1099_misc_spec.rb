@@ -106,4 +106,13 @@ describe "Form1099" do
       assert_data_matches_file_content("f1099msc#{copy}_data_and_template.pdf", pdf)
     end
   end
+
+  it "should generate with offset" do
+    @form1099.x_offset = 20 # right 20px
+    @form1099.y_offset = -20 # down 20px
+    @form1099.copy = 'A'
+    pdf = @form1099.to_pdf(:with_template => true)
+    write_content_to_file("f1099mscA_data_and_template_offset.pdf", pdf, true)
+    assert_data_matches_file_content("f1099mscA_data_and_template_offset.pdf", pdf)
+  end
 end

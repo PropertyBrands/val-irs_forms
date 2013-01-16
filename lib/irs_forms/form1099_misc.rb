@@ -19,8 +19,8 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
     col2_offset = 122
     col3_offset = 255
 
-    x = @pdf.bounds.left + x_offset
-    y = @pdf.bounds.top - y_offset - 10
+    x = pdf_left + x_offset
+    y = pdf_top - y_offset - 10
 
     # Payer Contact Information
     @pdf.bounding_box([x, y], :width => 240, :height => 90) do

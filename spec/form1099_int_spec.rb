@@ -37,8 +37,16 @@ describe "Form1099 INT" do
     IrsForms::Form1099Int::COPIES.each do |copy|
       @form1099.copy = copy
       pdf = @form1099.to_pdf(:with_template => true)
-      write_content_to_file("f1099int#{copy}_data_and_template.pdf", pdf, true)
+      write_content_to_file("f1099int#{copy}_data_and_template.pdf", pdf)
       assert_data_matches_file_content("f1099int#{copy}_data_and_template.pdf", pdf)
     end
+  end
+  it "should generate with offset" do
+    @form1099.x_offset = 20 # right 20px
+    @form1099.y_offset = -20 # down 20px
+    @form1099.copy = 'A'
+    pdf = @form1099.to_pdf(:with_template => true)
+    write_content_to_file("f1099intA_data_and_template_offset.pdf", pdf)
+    assert_data_matches_file_content("f1099intA_data_and_template_offset.pdf", pdf)
   end
 end
