@@ -1,16 +1,16 @@
 # Base class for Form1099s
 class IrsForms::Form1099 < IrsForms::Form
 
-  attr_accessor :copy, :data
+  attr_accessor :copy
 
   COPIES = %W{A B C 1 2}
 
   def initialize(options={})
+    options[:data] ||= []
+    super
 
     self.copy = options[:copy]
     check_valid_copy! if copy.present?
-
-    self.data = options[:data] || []
   end
 
   def to_prawn(options={})

@@ -1,5 +1,11 @@
 class IrsForms::Form
 
+  attr_accessor :data
+
+  def initialize(options={})
+    self.data = options[:data] || {}
+  end
+
   def template_filepath(filename)
     dir = File.expand_path(File.dirname(__FILE__) + '/../../templates')
     "#{dir}/#{filename}"

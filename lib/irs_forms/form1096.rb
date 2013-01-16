@@ -1,11 +1,5 @@
 class IrsForms::Form1096 < IrsForms::Form
 
-  attr_accessor :data
-
-  def initialize(options={})
-    self.data = options[:data] || {}
-  end
-
   def template_filepath
     super("f1096.pdf")
   end
