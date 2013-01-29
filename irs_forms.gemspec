@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "irs_forms"
-  s.version = "0.0.0"
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryan Winograd"]
-  s.date = "2013-01-09"
+  s.date = "2013-01-29"
   s.description = "Generate IRS forms with your data"
   s.email = "ryan@thewinograds.com"
   s.extra_rdoc_files = [
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "irs_forms.gemspec",
     "lib/irs_forms.rb",
     "lib/irs_forms/form.rb",
     "lib/irs_forms/form1096.rb",
@@ -36,13 +37,16 @@ Gem::Specification.new do |s|
     "spec/assets/f1096_for_1099int.pdf-0.12.0.pdf",
     "spec/assets/f1096_with_data_and_no_template.pdf-0.12.0.pdf",
     "spec/assets/f1096_with_data_and_template.pdf-0.12.0.pdf",
+    "spec/assets/f1096_with_data_and_template_offset.pdf-0.12.0.pdf",
     "spec/assets/f1096_with_template.pdf-0.12.0.pdf",
     "spec/assets/f1099intA_data_and_template.pdf-0.12.0.pdf",
+    "spec/assets/f1099intA_data_and_template_offset.pdf-0.12.0.pdf",
     "spec/assets/f1099intB_data_and_template.pdf-0.12.0.pdf",
     "spec/assets/f1099intC_data_and_template.pdf-0.12.0.pdf",
     "spec/assets/f1099msc1_data_and_template.pdf-0.12.0.pdf",
     "spec/assets/f1099msc2_data_and_template.pdf-0.12.0.pdf",
     "spec/assets/f1099mscA_data_and_template.pdf-0.12.0.pdf",
+    "spec/assets/f1099mscA_data_and_template_offset.pdf-0.12.0.pdf",
     "spec/assets/f1099mscB_data_and_template.pdf-0.12.0.pdf",
     "spec/assets/f1099mscC_data_and_template.pdf-0.12.0.pdf",
     "spec/form1096_spec.rb",
@@ -103,3 +107,4 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>, [">= 1.0.0"])
   end
 end
+
