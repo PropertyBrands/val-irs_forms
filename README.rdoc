@@ -2,6 +2,10 @@
 
 Generate IRS forms with your data
 
+irs_forms makes it easy to generate forms with data placed in the correct locations. See these examples:
+with template [PDF[https://github.com/ValencePM/irs_forms/blob/master/spec/assets/f1099msc1_data_and_template.pdf-0.12.0.pdf]],
+without template [PDF[https://github.com/ValencePM/irs_forms/blob/master/spec/assets/copyA_with_data_and_no_template.pdf-0.12.0.pdf]].
+
 == List of Supported Forms
 
 * Form 1096
