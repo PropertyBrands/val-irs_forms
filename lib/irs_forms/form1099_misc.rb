@@ -13,7 +13,7 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
   end
 
   def render_data_to_prawn(hash, position)
-    y_offset = (position == :top ? 0 : 395)
+    y_offset = (position == :top ? 10 : 405)
     x_offset = 20
 
     col2_offset = 122
@@ -29,7 +29,7 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
        end
     end
 
-    y -= 115
+    y -= 95
 
     # Payer Federal ID
     @pdf.bounding_box([x, y], :width => 120, :height => 50) do
@@ -53,21 +53,20 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
        text format_amount(hash[:nonemployee_compensation])
     end
 
-    y -= 40
+    y -= 35
 
     # Recipient Address
     @pdf.bounding_box([x, y], :width => 240, :height => 50) do
        text hash[:recipient_street_address]
-       @pdf.move_down 15
+       @pdf.move_down 25
        text hash[:recipient_city_state_zip]
     end
 
-    y -= 60
+    y -= 75
     # Recipient Account Number
     @pdf.bounding_box([x, y], :width => 120, :height => 50) do
        text hash[:recipient_account_number]
     end
-
   end
 
   def check_valid_copy!

@@ -47,6 +47,13 @@ describe "Form1096" do
       assert_data_matches_file_content('f1096_for_1099int.pdf', pdf)
     end
 
+    it "check mark for 1099msc in correct location" do
+      @form1096.data[:type_of_form] = '1099msc'
+      pdf = @form1096.to_pdf(:with_template => true)
+      write_content_to_file('f1096_for_1099msc.pdf', pdf)
+      assert_data_matches_file_content('f1096_for_1099msc.pdf', pdf)
+    end
+
     it "should generate PDF with data and no template" do
       pdf = @form1096.to_pdf # default is to not use template
       write_content_to_file('f1096_with_data_and_no_template.pdf', pdf)

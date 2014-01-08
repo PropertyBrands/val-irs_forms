@@ -9,12 +9,10 @@ class IrsForms::Form1099Int < IrsForms::Form1099
   private
 
   def calculate_position(index)
-    case index%3
+    case index%2
     when 0
       :top
     when 1
-      :middle
-    when 2
       :bottom
     end
   end
@@ -22,11 +20,9 @@ class IrsForms::Form1099Int < IrsForms::Form1099
   def render_data_to_prawn(hash, position)
     y_offset = case position
                when :top
-                 0
-               when :middle
-                 263
+                 10
                when :bottom
-                 528
+                 405
                end
     x_offset = 20
 
@@ -44,11 +40,11 @@ class IrsForms::Form1099Int < IrsForms::Form1099
     end
 
     # Interest Income
-    @pdf.bounding_box([x + col3_offset, y - 25], :width => 120, :height => 50) do
+    @pdf.bounding_box([x + col3_offset, y - 30], :width => 120, :height => 50) do
        text format_amount(hash[:interest_income])
     end
 
-    y -= 75
+    y -= 95
 
     # Payer Federal ID
     @pdf.bounding_box([x, y], :width => 120, :height => 50) do
@@ -60,28 +56,27 @@ class IrsForms::Form1099Int < IrsForms::Form1099
        text hash[:recipient_federal_id]
     end
 
-    y -= 25
+    y -= 45
 
     # Recipient Name
     @pdf.bounding_box([x, y], :width => 120, :height => 50) do
        text hash[:recipient_name]
     end
 
-    y -= 33
+    y -= 35
 
     # Recipient Address
     @pdf.bounding_box([x, y], :width => 240, :height => 50) do
        text hash[:recipient_street_address]
-       @pdf.move_down 10
+       @pdf.move_down 20
        text hash[:recipient_city_state_zip]
     end
 
-    y -= 50
+    y -= 70
 
     # Recipient Account Number
     @pdf.bounding_box([x, y], :width => 120, :height => 50) do
        text hash[:recipient_account_number]
     end
-
   end
 end
