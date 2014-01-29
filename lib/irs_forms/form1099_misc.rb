@@ -44,7 +44,7 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
     y -= 45
 
     # Recipient Name
-    @pdf.bounding_box([x, y], :width => 120, :height => 50) do
+    @pdf.bounding_box([x, y], :width => 240, :height => 50) do
        text hash[:recipient_name]
     end
 

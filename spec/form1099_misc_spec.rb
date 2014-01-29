@@ -24,7 +24,7 @@ describe "Form1099Misc Copy A" do
           'City, State 00000', '(555) 555-5555'],
         :payer_federal_id => 'XX-XXXXXXX',
         :recipient_federal_id => 'YY-YYYYYY1',
-        :recipient_name => 'Recipient Name',
+        :recipient_name => 'A Very Long Recipient Name To Test Width',
         :recipient_street_address => 'Street Address Line 1',
         :recipient_city_state_zip => 'Long Name for a City, State 11111-1111',
         :recipient_account_number => 'XXXXX',
