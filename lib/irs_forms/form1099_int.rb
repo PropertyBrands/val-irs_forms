@@ -63,12 +63,17 @@ class IrsForms::Form1099Int < IrsForms::Form1099
        text hash[:recipient_name]
     end
 
-    y -= 35
+    if copy == 'A'
+      y -= 25
+    else
+      y -= 35
+    end
 
     # Recipient Address
     @pdf.bounding_box([x, y], :width => 240, :height => 50) do
-       text hash[:recipient_street_address]
-       @pdf.move_down 20
+       text hash[:recipient_street_address_line_1], size: 10
+       text hash.fetch(:recipient_street_address_line_2, " "), size: 10
+       @pdf.move_down 15
        text hash[:recipient_city_state_zip]
     end
 

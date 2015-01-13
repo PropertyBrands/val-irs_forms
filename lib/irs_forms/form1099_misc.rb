@@ -53,12 +53,17 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
        text format_amount(hash[:nonemployee_compensation])
     end
 
-    y -= 35
+    if copy == 'A'
+      y -= 25
+    else
+      y -= 35
+    end
 
     # Recipient Address
     @pdf.bounding_box([x, y], :width => 240, :height => 50) do
-       text hash[:recipient_street_address]
-       @pdf.move_down 25
+       text hash[:recipient_street_address_line_1], size: 10
+       text hash.fetch(:recipient_street_address_line_2, " "), size: 10
+       @pdf.move_down 15
        text hash[:recipient_city_state_zip]
     end
 

@@ -9,7 +9,8 @@ describe "Form1099 INT" do
       :payer_federal_id => 'XX-XXXXXXX',
       :recipient_federal_id => 'YY-YYYYYY1',
       :recipient_name => 'Recipient Name',
-      :recipient_street_address => 'Street Address Line 1',
+      :recipient_street_address_line_1 => 'Street Address Line 1',
+      :recipient_street_address_line_2 => 'Line 2',
       :recipient_city_state_zip => 'City, State 11111',
       :recipient_account_number => 'XXXXX',
       :interest_income => '9875383.39'},
@@ -19,7 +20,7 @@ describe "Form1099 INT" do
         :payer_federal_id => 'XX-XXXXXXX',
         :recipient_federal_id => 'YY-YYYYYY2',
         :recipient_name => 'Recipient Name',
-        :recipient_street_address => 'Street Address Line 1',
+        :recipient_street_address_line_1 => 'Street Address Line 1',
         :recipient_city_state_zip => 'A very long name for a City, State 11111',
         :interest_income => '999'},
       {:payer_contact_information => [
@@ -28,7 +29,7 @@ describe "Form1099 INT" do
         :payer_federal_id => 'XX-XXXXXXX',
         :recipient_federal_id => 'YY-YYYYYY3',
         :recipient_name => 'Recipient Name',
-        :recipient_street_address => 'Street Address Line 1',
+        :recipient_street_address_line_1 => 'Street Address Line 1',
         :recipient_city_state_zip => 'City, State 11111',
         :interest_income => '9'}
     ])
