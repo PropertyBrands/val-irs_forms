@@ -44,8 +44,8 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
     y -= 45
 
     # Recipient Name
-    @pdf.bounding_box([x, y], :width => 240, :height => 50) do
-       text hash[:recipient_name]
+    @pdf.bounding_box([x, y], width: 240, height: 50) do
+      auto_sized_text(hash[:recipient_name], 12, 240)
     end
 
     # Nonemployee compensation
@@ -77,5 +77,4 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
   def check_valid_copy!
     raise "Invalid copy. Must be one of #{COPIES}. You entered #{copy}." unless COPIES.include?(copy)
   end
-
 end

@@ -54,4 +54,13 @@ class IrsForms::Form
     end
   end
 
+  def auto_sized_text(text, target_size, max_width)
+    size = target_size + 1
+    width = max_width + 1
+    while width >= 240 && size >= 8
+      size -= 1
+      width = @pdf.width_of(text, size: size)
+    end
+    @pdf.text(text, size: size)
+  end
 end

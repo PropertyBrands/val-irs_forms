@@ -38,7 +38,7 @@ describe "Form1099Misc Copy A" do
           'City, State 00000', '(555) 555-5555'],
         :payer_federal_id => 'XX-XXXXXXX',
         :recipient_federal_id => 'YY-YYYYYY2',
-        :recipient_name => 'Recipient Name',
+        :recipient_name => 'Recipient Name that is even longer than the previous',
         :recipient_street_address_line_1 => 'Street Address Line 1',
         :recipient_city_state_zip => 'City, State 11111',
         :recipient_account_number => 'XXXXX',
