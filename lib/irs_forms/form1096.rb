@@ -73,14 +73,15 @@ class IrsForms::Form1096 < IrsForms::Form
     end if data[:total_amount_reported]
 
     row1 = 475 + self.y_offset
-    col14 = 400 + self.x_offset
-    col17 = 485 + self.x_offset
+    row2 = 427 + self.y_offset
+    col14 = 517 + self.x_offset
+    col3 = 100 + self.x_offset
 
     check_form_coords = case data[:type_of_form]
                         when '1099int'
                           [col14, row1]
                         when '1099msc'
-                          [col17, row1]
+                          [col3, row2]
                         end
     text "X", at: check_form_coords if check_form_coords
   end
