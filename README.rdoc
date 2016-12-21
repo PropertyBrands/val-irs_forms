@@ -11,6 +11,31 @@ without template [PDF[https://github.com/ValencePM/irs_forms/blob/master/spec/as
 * Form 1096
 * Form 1099 (MSC)
 
+== Annual form update
+
+Each year, irs_forms should be updated to use the current year's IRS forms.
+Follow these steps to update the PDFs:
+
+```
+cd prep
+ruby prep.rb
+mv ./outputs/* ../templates
+```
+
+Now the new PDFs have been generated and moved into place. The final step,
+before committing, is to update the specs and manually review the new PDFs.
+
+To update the specs, open `spec/spec_helper` and change the method signature of
+`#write_content_to_file` so that `force_write` defaults to `true`. Now run the
+specs with `rspec`. This will update the spec assets.
+
+Review the PDFs in `spec/assets` for correctness, paying special attention to
+the correct placement of text. One of the items that changes most years is the
+placement of the boxes on the 1096 forms.
+
+After making any required changes, run the specs one more time, revert
+`force_write`, and commit/push the changes.
+
 == Contributing to irs_forms
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
