@@ -12,6 +12,14 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
     index%2 == 0 ? :top : :bottom
   end
 
+  def copy_offset(copy)
+    if copy == "A"
+      10
+    else
+      20
+    end
+  end
+
   def render_data_to_prawn(hash, position)
     y_offset = (position == :top ? 10 : 405)
     x_offset = 20
@@ -20,7 +28,7 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
     col3_offset = 255
 
     x = pdf_left + x_offset
-    y = pdf_top - y_offset - 10
+    y = pdf_top - y_offset - copy_offset(copy)
 
     # Payer Contact Information
     @pdf.bounding_box([x, y], :width => 240, :height => 90) do
@@ -29,7 +37,7 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
        end
     end
 
-    y -= 95
+    y -= 90
 
     # Payer Federal ID
     @pdf.bounding_box([x, y], :width => 120, :height => 50) do
@@ -49,25 +57,29 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
     end
 
     # Nonemployee compensation
-    @pdf.bounding_box([x + col3_offset, y - 10], :width => 120, :height => 50) do
+    @pdf.bounding_box([x + col3_offset, y], width: 120, height: 50) do
        text format_amount(hash[:nonemployee_compensation])
     end
 
-    if copy == 'A'
-      y -= 25
+    if copy == "A"
+      y -= 67
     else
-      y -= 35
+      y -= 63
     end
 
     # Recipient Address
     @pdf.bounding_box([x, y], :width => 240, :height => 50) do
-       text hash[:recipient_street_address_line_1], size: 10
-       text hash.fetch(:recipient_street_address_line_2, " "), size: 10
-       @pdf.move_down 15
-       text hash[:recipient_city_state_zip]
+      font_size = 7
+      line2 = hash.fetch(:recipient_street_address_line_2, nil)
+      text hash[:recipient_street_address_line_1], size: font_size
+      if line2
+        text line2, size: font_size
+      end
+      text hash[:recipient_city_state_zip], size: font_size
     end
 
-    y -= 75
+    y -= 40
+
     # Recipient Account Number
     @pdf.bounding_box([x, y], :width => 120, :height => 50) do
        text hash[:recipient_account_number]

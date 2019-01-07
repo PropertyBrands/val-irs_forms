@@ -74,8 +74,8 @@ class IrsForms::Form1096 < IrsForms::Form
 
     row1 = 476 + self.y_offset
     row2 = 428 + self.y_offset
-    col14 = 485 + self.x_offset
-    col2 = 64 + self.x_offset
+    col14 = 488 + self.x_offset
+    col2 = 56 + self.x_offset
 
     check_form_coords = case data[:type_of_form]
                         when '1099int'
