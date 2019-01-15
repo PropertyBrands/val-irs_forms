@@ -62,19 +62,25 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
     end
 
     if copy == "A"
-      y -= 67
+      y -= 35
     else
-      y -= 63
+      y -= 31
     end
 
     # Recipient Address
     @pdf.bounding_box([x, y], :width => 240, :height => 50) do
-      font_size = 7
+      font_size = 10
       line2 = hash.fetch(:recipient_street_address_line_2, nil)
       text hash[:recipient_street_address_line_1], size: font_size
       if line2
         text line2, size: font_size
       end
+    end
+
+    y -= 37
+
+    @pdf.bounding_box([x, y], width: 240, height: 50) do
+      font_size = 10
       text hash[:recipient_city_state_zip], size: font_size
     end
 
