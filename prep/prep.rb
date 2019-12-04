@@ -61,11 +61,11 @@ puts "Fetching #{type} for #{year} from: #{url}"
 `wget #{url} -O tmp/f#{type}.pdf`
 puts "\tExtracting various pages from f#{type}"
 forms = {
-  'copyA' => 2,
-  'copy1' => 3,
-  'copyB' => 4,
-  'copy2' => 6,
-  'copyC' => 8,
+  'copyA' => 1,
+  'copy1' => 2,
+  'copyB' => 3,
+  'copy2' => 5,
+  'copyC' => 7,
 }
 forms.each_pair do |form_name, page|
   puts "\tExtracting #{form_name} (page #{page})"
