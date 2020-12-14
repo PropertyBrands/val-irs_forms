@@ -25,7 +25,6 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
     x_offset = 20
 
     col2_offset = 122
-    col3_offset = 255
 
     x = pdf_left + x_offset
     y = pdf_top - y_offset - copy_offset(copy)
@@ -54,11 +53,6 @@ class IrsForms::Form1099Misc < IrsForms::Form1099
     # Recipient Name
     @pdf.bounding_box([x, y], width: 240, height: 50) do
       auto_sized_text(hash[:recipient_name], 12, 240)
-    end
-
-    # Nonemployee compensation
-    @pdf.bounding_box([x + col3_offset, y], width: 120, height: 50) do
-       text format_amount(hash[:nonemployee_compensation])
     end
 
     if copy == "A"

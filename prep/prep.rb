@@ -93,6 +93,25 @@ forms.each_pair do |form_name, page|
   `pdftk tmp/f#{type}.pdf cat #{page} output #{filename}`
 end
 
+type = "1099nec"
+url = form_url(type, year)
+puts "Fetching #{type} for #{year} from: #{url}"
+`wget #{url} -O tmp/f#{type}.pdf`
+puts "\tExtracting various pages from f#{type}"
+forms = {
+  'copyA' => 2,
+  'copy1' => 3,
+  'copyB' => 4,
+  'copy2' => 6,
+  'copyC' => 7,
+}
+forms.each_pair do |form_name, page|
+  puts "\tExtracting #{form_name} (page #{page})"
+  filename = "tmp/f#{type}--#{form_name}-orig.pdf"
+  pages_to_halve << filename
+  `pdftk tmp/f#{type}.pdf cat #{page} output #{filename}`
+end
+
 halved_pages = pages_to_halve.map do |page_to_halve|
   halve(page_to_halve)
 end

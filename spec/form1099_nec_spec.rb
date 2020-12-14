@@ -1,19 +1,19 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require File.expand_path(File.dirname(__FILE__) + "/spec_helper")
 
-describe "Form1099Misc Copy A" do
+describe "Form1099Nec Copy A" do
   before(:each) do
-    @form1099 = IrsForms::Form1099Misc.new(copy: 'A')
+    @form1099 = IrsForms::Form1099Nec.new(copy: "A")
   end
 
   it "should generate the template_filepath" do
-     dir = File.expand_path(File.dirname(__FILE__) + '/../templates')
-    @form1099.template_filepath.should == "#{dir}/f1099msc-copyA.pdf"
+    dir = File.expand_path(File.dirname(__FILE__) + "/../templates")
+    @form1099.template_filepath.should == "#{dir}/f1099nec-copyA.pdf"
   end
 
   it "should generate PDF on the template" do
     pdf = @form1099.to_pdf(:with_template => true)
-    write_content_to_file('f1099msc_copyA_with_template.pdf', pdf)
-    assert_data_matches_file_content('f1099msc_copyA_with_template.pdf', pdf)
+    write_content_to_file('f1099nec_copyA_with_template.pdf', pdf)
+    assert_data_matches_file_content('f1099nec_copyA_with_template.pdf', pdf)
   end
 
   describe "with a three forms of data" do
@@ -61,22 +61,21 @@ describe "Form1099Misc Copy A" do
 
     it "should generate PDF with data on the template" do
       pdf = @form1099.to_pdf(:with_template => true)
-      write_content_to_file('f1099msc_copyA_with_data_and_template.pdf', pdf)
-      assert_data_matches_file_content('f1099msc_copyA_with_data_and_template.pdf', pdf)
+      write_content_to_file('f1099nec_copyA_with_data_and_template.pdf', pdf)
+      assert_data_matches_file_content('f1099nec_copyA_with_data_and_template.pdf', pdf)
     end
 
     it "should generate PDF with data and no template" do
       pdf = @form1099.to_pdf # default is to not use template
-      write_content_to_file('f1099msc_copyA_with_data_and_no_template.pdf', pdf)
-      assert_data_matches_file_content('f1099msc_copyA_with_data_and_no_template.pdf', pdf)
+      write_content_to_file('f1099nec_copyA_with_data_and_no_template.pdf', pdf)
+      assert_data_matches_file_content('f1099nec_copyA_with_data_and_no_template.pdf', pdf)
     end
   end
-
 end
 
-describe "Form1099" do
+describe "Form1099-NEC" do
   before(:all) do
-    @form1099 = IrsForms::Form1099Misc.new(data: [
+    @form1099 = IrsForms::Form1099Nec.new(data: [
       {:payer_contact_information => [
         'Payer Name, LLC', 'Address Line 1',
         'City, State 00000', '(555) 555-5555'],
@@ -100,12 +99,13 @@ describe "Form1099" do
         :nonemployee_compensation => '999'}
     ])
   end
+
   it "should print correctly for each copy" do
-    IrsForms::Form1099Misc::COPIES.each do |copy|
+    IrsForms::Form1099Nec::COPIES.each do |copy|
       @form1099.copy = copy
       pdf = @form1099.to_pdf(:with_template => true)
-      write_content_to_file("f1099msc#{copy}_data_and_template.pdf", pdf)
-      assert_data_matches_file_content("f1099msc#{copy}_data_and_template.pdf", pdf)
+      write_content_to_file("f1099nec#{copy}_data_and_template.pdf", pdf)
+      assert_data_matches_file_content("f1099nec#{copy}_data_and_template.pdf", pdf)
     end
   end
 
@@ -114,7 +114,7 @@ describe "Form1099" do
     @form1099.y_offset = -20 # down 20px
     @form1099.copy = 'A'
     pdf = @form1099.to_pdf(:with_template => true)
-    write_content_to_file("f1099mscA_data_and_template_offset.pdf", pdf)
-    assert_data_matches_file_content("f1099mscA_data_and_template_offset.pdf", pdf)
+    write_content_to_file("f1099necA_data_and_template_offset.pdf", pdf)
+    assert_data_matches_file_content("f1099necA_data_and_template_offset.pdf", pdf)
   end
 end
