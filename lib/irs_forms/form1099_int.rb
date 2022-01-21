@@ -1,6 +1,6 @@
 class IrsForms::Form1099Int < IrsForms::Form1099
 
-  COPIES = %W{A B C}
+  COPIES = %W{A B C 1 2}
 
   def template_filepath
     super("f1099int-copy#{copy}.pdf")

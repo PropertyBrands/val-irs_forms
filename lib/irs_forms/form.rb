@@ -8,6 +8,10 @@ class IrsForms::Form
     self.y_offset = options[:y_offset]
   end
 
+  def entries_per_page
+    2
+  end
+
   def template_filepath(filename)
     dir = File.expand_path(File.dirname(__FILE__) + '/../../templates')
     "#{dir}/#{filename}"

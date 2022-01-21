@@ -1,6 +1,7 @@
 `rm -rf ./tmp && mkdir -p ./tmp`
 `rm -rf ./outputs && mkdir -p ./outputs`
-pages_to_halve = []
+pages_to_double = []
+pages_to_triple = []
 
 def form_url(type, year)
   "www.irs.gov/pub/irs-prior/f#{type}--#{year}.pdf"
@@ -19,7 +20,23 @@ def halve(filename)
 
   `rm #{cropped_filename}`
   command =  "pdfcrop --margins '#{side_margin} #{top_margin} #{side_margin} #{top_margin}' #{filename} #{cropped_filename}"
-  puts command
+  `#{command}`
+  cropped_filename
+end
+
+def third(filename)
+  orig_width, orig_height = dimensions(filename)
+  cropped_filename = filename.sub('orig', 'crop')
+  `pdfcrop #{filename} #{cropped_filename}`
+  crop_width, crop_height = dimensions(cropped_filename)
+
+  expected_width = orig_width
+  expected_height = orig_height / 3
+  side_margin = (expected_width - crop_width) / 2
+  top_margin = (expected_height - crop_height) / 2
+
+  `rm #{cropped_filename}`
+  command = "pdfcrop --margins '#{side_margin} #{top_margin} #{side_margin} #{top_margin}' #{filename} #{cropped_filename}"
   `#{command}`
   cropped_filename
 end
@@ -34,14 +51,24 @@ end
 def duplicate_top_half_to_bottom(filename)
   final_filename = filename.sub('-crop', '').sub('tmp/', '')
   tex_filename = "#{final_filename.sub('.pdf', '')}.tex"
-  `cp file.tex.template tmp/#{tex_filename}`
+  `cp bisected_file.tex.template tmp/#{tex_filename}`
   `perl -pi -e 's/FILENAME/#{filename.sub('/', '\/')}/' tmp/#{final_filename.sub('.pdf', '')}.tex`
   `pdflatex tmp/#{tex_filename}`
   `rm #{tex_filename.sub('.tex', '.aux')} #{tex_filename.sub('.tex', '.log')}`
   `mv #{final_filename} ./outputs/#{final_filename.sub('--', '-')}`
 end
 
-## PROGAM EXECUTION STARTS HERE ##
+def triplicate_top_half(filename)
+  final_filename = filename.sub('-crop', '').sub('tmp/', '')
+  tex_filename = "#{final_filename.sub('.pdf', '')}.tex"
+  `cp trisected_file.tex.template tmp/#{tex_filename}`
+  `perl -pi -e 's/FILENAME/#{filename.sub('/', '\/')}/' tmp/#{final_filename.sub('.pdf', '')}.tex`
+  `pdflatex tmp/#{tex_filename}`
+  `rm #{tex_filename.sub('.tex', '.aux')} #{tex_filename.sub('.tex', '.log')}`
+  `mv #{final_filename} ./outputs/#{final_filename.sub('--', '-')}`
+end
+
+## PROGRAM EXECUTION STARTS HERE ##
 
 puts "This program will fetch and prepare f1099s"
 puts "What year? (format: YYYY)"
@@ -61,16 +88,16 @@ puts "Fetching #{type} for #{year} from: #{url}"
 `wget #{url} -O tmp/f#{type}.pdf`
 puts "\tExtracting various pages from f#{type}"
 forms = {
-  'copyA' => 1,
-  'copy1' => 2,
-  'copyB' => 3,
-  'copy2' => 5,
-  'copyC' => 7,
+  'copyA' => 2,
+  'copy1' => 3,
+  'copyB' => 4,
+  'copy2' => 6,
+  'copyC' => 8,
 }
 forms.each_pair do |form_name, page|
   puts "\tExtracting #{form_name} (page #{page})"
   filename = "tmp/f#{type}--#{form_name}-orig.pdf"
-  pages_to_halve << filename
+  pages_to_double << filename
   `pdftk tmp/f#{type}.pdf cat #{page} output #{filename}`
 end
 
@@ -89,7 +116,7 @@ forms = {
 forms.each_pair do |form_name, page|
   puts "\tExtracting #{form_name} (page #{page})"
   filename = "tmp/f#{type}--#{form_name}-orig.pdf"
-  pages_to_halve << filename
+  pages_to_double << filename
   `pdftk tmp/f#{type}.pdf cat #{page} output #{filename}`
 end
 
@@ -108,16 +135,24 @@ forms = {
 forms.each_pair do |form_name, page|
   puts "\tExtracting #{form_name} (page #{page})"
   filename = "tmp/f#{type}--#{form_name}-orig.pdf"
-  pages_to_halve << filename
+  pages_to_triple << filename
   `pdftk tmp/f#{type}.pdf cat #{page} output #{filename}`
 end
 
-halved_pages = pages_to_halve.map do |page_to_halve|
+halved_pages = pages_to_double.map do |page_to_halve|
   halve(page_to_halve)
 end
 
 halved_pages.each do |halved_page|
   duplicate_top_half_to_bottom(halved_page)
+end
+
+tripled_pages = pages_to_triple.map do |page_to_triple|
+  third(page_to_triple)
+end
+
+tripled_pages.each do |tripled_page|
+  triplicate_top_half(tripled_page)
 end
 
 puts "Final copies location in ./outputs"
